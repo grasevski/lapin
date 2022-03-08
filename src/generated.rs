@@ -380,6 +380,7 @@ impl Channel {
 
     pub async fn basic_qos(
         &self,
+        prefetch_size: LongUInt,
         prefetch_count: ShortUInt,
         options: BasicQosOptions,
     ) -> Result<()> {
@@ -389,6 +390,7 @@ impl Channel {
 
         let BasicQosOptions { global } = options;
         let method = AMQPClass::Basic(protocol::basic::AMQPMethod::Qos(protocol::basic::Qos {
+            prefetch_size,
             prefetch_count,
             global,
         }));
